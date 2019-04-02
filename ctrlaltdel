@@ -1,7 +1,5 @@
 #!/bin/sh
-
-PATH=/usr/bin:/usr/sbin
-MSG="System is going down..."
+PATH="/usr/bin:/usr/sbin:/bin:/sbin"
 
 # We check for this file after receiving a SIGCONT to move to stage3
 chmod 100 /run/runit/stopit
@@ -10,4 +8,4 @@ chmod 100 /run/runit/stopit
 chmod 100 /run/runit/reboot
 
 # Proceed with shutdown process
-echo "$MSG" | wall
+printf 'System is going down...\n' | wall

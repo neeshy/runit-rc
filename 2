@@ -1,21 +1,19 @@
 #!/bin/sh
-# vim: set ts=4 sw=4 et:
+PATH="/usr/bin:/usr/sbin:/bin:/sbin"
 
-PATH=/usr/bin:/usr/sbin
-
-runlevel=default
+runlevel="default"
 for arg in $(cat /proc/cmdline); do
-    if [ -d /etc/runit/runsvdir/"$arg" ]; then
-        echo "Runlevel detected: '$arg' (via kernel cmdline)"
+    if [ -d "/etc/runit/runsvdir/$arg" ]; then
+        msg "Runlevel detected: '$arg' (via kernel cmdline)"
         runlevel="$arg"
     fi
 done
 
 [ -x /etc/rc.local ] && /etc/rc.local
 
-runsvchdir "${runlevel}"
+runsvchdir "$runlevel"
 mkdir -p /run/runit/runsvdir
 ln -s /etc/runit/runsvdir/current /run/runit/runsvdir/current
 
-exec env - PATH=$PATH \
+exec env - PATH="$PATH" \
     runsvdir -P /run/runit/runsvdir/current 'log: ...........................................................................................................................................................................................................................................................................................................................................................................................................'

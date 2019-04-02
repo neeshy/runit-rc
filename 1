@@ -1,30 +1,18 @@
 #!/bin/sh
-# vim: set ts=4 sw=4 et:
-
-PATH=/usr/bin:/usr/sbin
+PATH="/usr/bin:/usr/sbin:/bin:/sbin"
 
 . /etc/runit/functions
+. /etc/os-release
 
-msg "Welcome to Void!"
-
-[ -r /etc/rc.conf ] && . /etc/rc.conf
+msg "Welcome to $NAME!"
 
 # Start core services: one-time system tasks.
-detect_virt
-for f in /etc/runit/core-services/*.sh; do
-	[ -r $f ] && . $f
+for f in /etc/runit/sysinit.d/*.sh; do
+    [ -r "$f" ] && . "$f"
 done
 
-dmesg >/var/log/dmesg.log
-if [ $(sysctl -n kernel.dmesg_restrict 2>/dev/null) -eq 1 ]; then
-	chmod 0600 /var/log/dmesg.log
-else
-	chmod 0644 /var/log/dmesg.log
-fi
-
 # create files for controlling runit
-mkdir -p /run/runit
-install -m000 /dev/null /run/runit/stopit
-install -m000 /dev/null /run/runit/reboot
+install -Dm000 /dev/null /run/runit/stopit
+install -Dm000 /dev/null /run/runit/reboot
 
 msg "Initialization complete, running stage 2..."

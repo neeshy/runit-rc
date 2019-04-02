@@ -1,54 +1,40 @@
-# *-*-shell-*-*
-
 msg() {
     # bold
-    printf "\033[1m=> $@\033[m\n"
+    printf '\033[1m=> %s\033[m\n' "$@"
 }
 
 msg_ok() {
     # bold/green
-    printf "\033[1m\033[32m OK\033[m\n"
+    printf '\033[1m\033[32m OK\033[m\n'
 }
 
 msg_error() {
     # bold/red
-    printf "\033[1m\033[31mERROR: $@\033[m\n"
+    printf '\033[1m\033[31mERROR: %s\033[m\n' "$@"
 }
 
 msg_warn() {
     # bold/yellow
-    printf "\033[1m\033[33mWARNING: $@\033[m\n"
+    printf '\033[1m\033[33mWARNING: %s\033[m\n' "$@"
 }
 
 emergency_shell() {
-    echo
-    echo "Cannot continue due to errors above, starting emergency shell."
-    echo "When ready type exit to continue booting."
+    printf '\n'
+    printf 'Cannot continue due to errors above, starting emergency shell.\n'
+    printf 'When ready type exit to continue booting.\n'
     /bin/sh -l
 }
 
-detect_virt() {
-    # Detect LXC (and other) containers
-    [ -z "${container+x}" ] || export VIRTUALIZATION=1
+cmd() {
+    for cmd in "$@"; do
+        command -v "$cmd" >/dev/null 2>&1 || return "$?"
+    done
 }
 
-deactivate_vgs() {
-    _group=${1:-All}
-    if [ -x /sbin/vgchange -o -x /bin/vgchange ]; then
-        vgs=$(vgs|wc -l)
-        if [ $vgs -gt 0 ]; then
-            msg "Deactivating $_group LVM Volume Groups..."
-            vgchange -an
-        fi
-    fi
-}
-
-deactivate_crypt() {
-    if [ -x /sbin/dmsetup -o -x /bin/dmsetup ]; then
-        msg "Deactivating Crypt Volumes"
-        for v in $(dmsetup ls --target crypt --exec "dmsetup info -c --noheadings -o open,name"); do
-            [ ${v%%:*} = "0" ] && cryptsetup close ${v##*:}
-        done
-        deactivate_vgs "Crypt"
-    fi
+mnt() {
+    # If the filesystem is already mounted, mount it again with
+    # 'remount' so that it uses the correct mount options. This is
+    # usually the case when dealing with an initramfs for example.
+    mountpoint -q "$4" && set -- "remount,$1" "$2" "$3" "$4"
+    mount -o "$1" -t "$2" "$3" "$4"
 }
