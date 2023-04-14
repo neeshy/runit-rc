@@ -33,7 +33,8 @@ if cmd cryptsetup dmsetup; then
     msg "Deactivating Crypt Volumes"
     for v in $(dmsetup ls --target crypt --exec "dmsetup info -c --noheadings -o open,name"); do
         if [ "${v%%:*}" = 0 ]; then
-            cryptsetup close "${v##*:}"
+            v="${v##*:}"
+            cryptsetup close "$v" && msg "[crypt] successfully closed: $v"
         fi
     done
     deactivate_vgs "Crypt"

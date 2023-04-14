@@ -10,7 +10,6 @@ is loosely based on https://github.com/chneukirchen/ignite
 - A POSIX shell
 - grep
 - sed
-- awk
 - findutils
 - procps-ng (needs pkill -s0,1)
 - kmod
