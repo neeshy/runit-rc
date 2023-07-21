@@ -8,7 +8,7 @@ install:
 	install -Dm644 -t ${DESTDIR}/etc/runit/shutdown.d shutdown.d/*.sh
 	install -Dm755 -t ${DESTDIR}/etc/runit 1 2 3 ctrlaltdel
 	install -Dm644 functions ${DESTDIR}/etc/runit/functions
-	install -Dm644 -t ${DESTDIR}/etc rc.local rc.shutdown
+	install -Dm755 -t ${DESTDIR}/etc rc.local rc.shutdown
 	ln -sf /run/runit/reboot ${DESTDIR}/etc/runit/reboot
 	ln -sf /run/runit/stopit ${DESTDIR}/etc/runit/stopit
 	install -Dm755 services/agetty ${DESTDIR}/etc/sv/agetty/run
