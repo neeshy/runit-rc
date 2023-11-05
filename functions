@@ -27,7 +27,7 @@ emergency_shell() {
 
 cmd() {
     for cmd in "$@"; do
-        command -v "$cmd" >/dev/null 2>&1 || return "$?"
+        command -pv "$cmd" >/dev/null 2>&1 || return "$?"
     done
 }
 
