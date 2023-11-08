@@ -9,7 +9,7 @@ for arg in $(cat /proc/cmdline); do
     fi
 done
 
-[ -x /etc/rc.local ] && /etc/rc.local
+[ -r /etc/rc.local ] && . /etc/rc.local
 
 runsvchdir "$runlevel"
 mkdir -p /run/runit/runsvdir
