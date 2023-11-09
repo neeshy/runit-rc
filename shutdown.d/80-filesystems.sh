@@ -1,6 +1,6 @@
 msg "Unmounting filesystems, disabling swap..."
 swapoff -a
-umount -ar -t noproc,sysfs,devtmpfs,tmpfs
+umount -ar -t noproc,nosysfs,nodevtmpfs,notmpfs
 msg "Remounting rootfs read-only..."
 mount -o remount,ro /
 
