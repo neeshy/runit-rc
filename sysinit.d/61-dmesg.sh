@@ -1,5 +1,5 @@
 dmesg >/var/log/dmesg.log
-if [ "$(sysctl -n kernel.dmesg_restrict 2>/dev/null)" = 1 ]; then
+if [ -r /proc/sys/kernel/dmesg_restrict ] && [ "$(cat /proc/sys/kernel/dmesg_restrict)" = 1 ]; then
     chmod 0600 /var/log/dmesg.log
 else
     chmod 0644 /var/log/dmesg.log
