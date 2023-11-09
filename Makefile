@@ -11,13 +11,15 @@ install:
 	install -Dm755 -t ${DESTDIR}/etc rc.local rc.shutdown
 	ln -sf /run/runit/reboot ${DESTDIR}/etc/runit/reboot
 	ln -sf /run/runit/stopit ${DESTDIR}/etc/runit/stopit
-	install -Dm755 services/agetty ${DESTDIR}/etc/sv/agetty/run
-	install -Dm755 services/sulogin ${DESTDIR}/etc/sv/sulogin/run
+	install -Dm755 services/agetty/run ${DESTDIR}/etc/sv/agetty/run
+	install -Dm755 services/agetty/finish ${DESTDIR}/etc/sv/agetty/finish
+	install -Dm755 services/sulogin/run ${DESTDIR}/etc/sv/sulogin/run
 	install -d ${DESTDIR}/etc/runit/runsvdir/default ${DESTDIR}/etc/runit/runsvdir/single
 	ln -sfn default ${DESTDIR}/etc/runit/runsvdir/current
 	for n in 1 2 3 4 5 6; do \
 		install -d ${DESTDIR}/etc/sv/agetty-tty$$n; \
 		ln -sfn ../agetty/run ${DESTDIR}/etc/sv/agetty-tty$$n/run; \
+		ln -sfn ../agetty/finish ${DESTDIR}/etc/sv/agetty-tty$$n/finish; \
 		ln -sfn /etc/sv/agetty-tty$$n ${DESTDIR}/etc/runit/runsvdir/default/agetty-tty$$n; \
 	done
 	ln -sfn /etc/sv/sulogin ${DESTDIR}/etc/runit/runsvdir/single/sulogin
