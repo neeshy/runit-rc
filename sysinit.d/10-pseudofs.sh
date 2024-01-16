@@ -3,9 +3,10 @@ mnt nosuid,nodev,noexec proc proc /proc
 mnt nosuid,nodev,noexec sysfs sys /sys
 mnt nosuid,mode=0755 devtmpfs dev /dev
 mnt nosuid,nodev,mode=0755 tmpfs run /run
-mkdir -p /run/lock /dev/pts /dev/shm
+mkdir -p /run/lock /dev/pts /dev/shm /dev/mqueue
 mnt nosuid,noexec,mode=0620 devpts devpts /dev/pts
 mnt nosuid,nodev,mode=1777 tmpfs shm /dev/shm
+mnt nosuid,nodev,noexec mqueue mqueue /dev/mqueue
 mnt nosuid,nodev,noexec securityfs securityfs /sys/kernel/security
 mnt nosuid,nodev,noexec debugfs debugfs /sys/kernel/debug
 mnt nosuid,nodev,noexec tracefs tracefs /sys/kernel/tracing
