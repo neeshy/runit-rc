@@ -14,8 +14,9 @@ install:
 	install -Dm755 services/agetty/run ${DESTDIR}/etc/sv/agetty/run
 	install -Dm755 services/agetty/finish ${DESTDIR}/etc/sv/agetty/finish
 	install -Dm755 services/sulogin/run ${DESTDIR}/etc/sv/sulogin/run
-	install -d ${DESTDIR}/etc/runit/runsvdir/default ${DESTDIR}/etc/runit/runsvdir/single
+	install -d ${DESTDIR}/etc/runit/runsvdir/default ${DESTDIR}/etc/runit/runsvdir/single ${DESTDIR}/var
 	ln -sfn default ${DESTDIR}/etc/runit/runsvdir/current
+	ln -sfn /run/runit/runsvdir/current ${DESTDIR}/var/service
 	for n in 1 2 3 4 5 6; do \
 		install -d ${DESTDIR}/etc/sv/agetty-tty$$n; \
 		ln -sfn ../agetty/run ${DESTDIR}/etc/sv/agetty-tty$$n/run; \
