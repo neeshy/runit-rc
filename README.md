@@ -8,7 +8,6 @@ is loosely based on https://github.com/chneukirchen/ignite
 ## Dependencies
 
 - A POSIX shell
-- grep
 - sed
 - findutils
 - procps-ng (needs pkill -s0,1)
