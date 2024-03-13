@@ -29,7 +29,7 @@ if cmd zpool zfs; then
         zpool import -Na -c /etc/zfs/zpool.cache
     else
         msg "Scanning for and importing ZFS pools..."
-        zpool import -Na -o cachefile=none
+        zpool import -Na
     fi
 
     msg "Mounting ZFS file systems..."
