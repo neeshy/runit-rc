@@ -27,7 +27,7 @@ emergency_shell() {
 
 cmd() {
     for cmd in "$@"; do
-        command -v "$cmd" >/dev/null 2>&1 || return "$?"
+        command -v -- "$cmd" >/dev/null 2>&1 || return "$?"
     done
 }
 
@@ -36,5 +36,5 @@ mnt() {
     # 'remount' so that it uses the correct mount options. This is
     # usually the case when dealing with an initramfs for example.
     mountpoint -q "$4" && set -- "remount,$1" "$2" "$3" "$4"
-    mount -o "$1" -t "$2" "$3" "$4"
+    mount -o "$1" -t "$2" -- "$3" "$4"
 }

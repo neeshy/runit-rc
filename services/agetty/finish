@@ -1,2 +1,2 @@
 #!/bin/sh
-exec utmpset -w "${PWD##*-}"
+exec utmpset -w -- "${PWD##*-}"
