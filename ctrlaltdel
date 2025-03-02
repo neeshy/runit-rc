@@ -1,5 +1,5 @@
 #!/bin/sh
-PATH="/usr/bin:/usr/sbin:/bin:/sbin"
+PATH=/usr/bin:/usr/sbin:/bin:/sbin
 
 # We check for this file after receiving a SIGCONT to move to stage3
 chmod 100 /run/runit/stopit

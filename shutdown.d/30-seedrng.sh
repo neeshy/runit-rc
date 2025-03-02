@@ -1,2 +1,2 @@
-msg "Saving random number generator seed..."
+msg 'Saving random number generator seed...'
 seedrng

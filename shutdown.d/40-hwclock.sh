@@ -1,2 +1,2 @@
-msg "Saving hardware clock..."
+msg 'Saving hardware clock...'
 hwclock --systohc --utc

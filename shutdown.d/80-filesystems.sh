@@ -1,19 +1,19 @@
-msg "Unmounting filesystems, disabling swap..."
+msg 'Unmounting filesystems, disabling swap...'
 swapoff -a
 umount -ar -t noproc,nosysfs,nodevtmpfs,notmpfs
-msg "Remounting rootfs read-only..."
+msg 'Remounting rootfs read-only...'
 mount -o remount,ro /
 
 sync
 
 if cmd zpool zfs; then
-    msg "Unsharing ZFS file systems..."
+    msg 'Unsharing ZFS file systems...'
     zfs unshare -a
 
-    msg "Unmounting ZFS file systems..."
+    msg 'Unmounting ZFS file systems...'
     zfs unmount -au
 
-    msg "Exporting ZFS pools..."
+    msg 'Exporting ZFS pools...'
     zpool export -a
 fi
 
@@ -30,17 +30,17 @@ deactivate_vgs() {
 
 deactivate_vgs
 if cmd cryptsetup dmsetup; then
-    msg "Deactivating Crypt Volumes"
-    for v in $(dmsetup ls --target crypt --exec="dmsetup info -c --noheadings -o open,name"); do
+    msg 'Deactivating Crypt Volumes'
+    for v in $(dmsetup ls --target crypt --exec='dmsetup info -c --noheadings -o open,name'); do
         if [ "${v%%:*}" = 0 ]; then
             v="${v##*:}"
             cryptsetup close "$v" && msg "[crypt] successfully closed: $v"
         fi
     done
-    deactivate_vgs "Crypt"
+    deactivate_vgs 'Crypt'
 fi
 
 if cmd mdadm; then
-    msg "Dectivating software RAID arrays..."
+    msg 'Dectivating software RAID arrays...'
     mdadm -Ss
 fi

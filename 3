@@ -1,11 +1,11 @@
 #!/bin/sh
-PATH="/usr/bin:/usr/sbin:/bin:/sbin"
+PATH=/usr/bin:/usr/sbin:/bin:/sbin
 
 . /etc/runit/functions
 
 printf '\n'
 
-msg "Waiting for services to stop..."
+msg 'Waiting for services to stop...'
 sv force-stop /var/service/*
 sv exit /var/service/*
 

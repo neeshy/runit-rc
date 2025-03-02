@@ -1,6 +1,6 @@
 # Do not try to load modules if kernel does not support them.
 if [ -e /proc/modules ]; then
-    msg "Loading kernel modules..."
+    msg 'Loading kernel modules...'
     for f in /etc/modules-load.d/*.conf /usr/lib/modules-load.d/*.conf; do
         [ -e "$f" ] || continue
         sed -E 's/[[:space:]]*(#.*)?$//;s/^[[:space:]]*//;/^$/d' "$f" |

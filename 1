@@ -1,5 +1,5 @@
 #!/bin/sh
-PATH="/usr/bin:/usr/sbin:/bin:/sbin"
+PATH=/usr/bin:/usr/sbin:/bin:/sbin
 
 . /etc/runit/functions
 . /etc/os-release
@@ -15,4 +15,4 @@ done
 install -Dm000 /dev/null /run/runit/stopit
 install -Dm000 /dev/null /run/runit/reboot
 
-msg "Initialization complete, running stage 2..."
+msg 'Initialization complete, running stage 2...'

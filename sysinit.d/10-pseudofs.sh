@@ -1,4 +1,4 @@
-msg "Mounting pseudo-filesystems..."
+msg 'Mounting pseudo-filesystems...'
 mnt nosuid,nodev,noexec proc proc /proc
 mnt nosuid,nodev,noexec sysfs sys /sys
 mnt nosuid,mode=0755 devtmpfs dev /dev

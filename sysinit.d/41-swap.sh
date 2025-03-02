@@ -1,2 +1,2 @@
-msg "Initializing swap..."
+msg 'Initializing swap...'
 swapon -a || emergency_shell
