@@ -1,2 +1,2 @@
 #!/bin/sh
-exec chpst -b init /sbin/runit-init 0
+exec chpst -b init -- /sbin/runit-init 0
