@@ -9,7 +9,6 @@ is loosely based on https://github.com/chneukirchen/ignite
 
 - A POSIX shell
 - sed
-- findutils
 - procps-ng (needs pkill -s0,1)
 - kmod
 - util-linux (needs wall)
