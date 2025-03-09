@@ -1,2 +1,4 @@
 #!/bin/sh
-exec chpst -P -- agetty -- "${PWD##*-}" 38400 linux
+port="${PWD##*-}"
+[ "$port" = tty1 ] && options=--noclear
+exec chpst -P -- agetty $options -- "$port" 38400 linux
