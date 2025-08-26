@@ -2,9 +2,9 @@
 PATH=/usr/bin:/usr/sbin:/bin:/sbin
 
 . /etc/runit/functions
-. /etc/os-release
 
-msg "Welcome to $NAME!"
+[ -r /etc/os-release ] && . /etc/os-release
+msg "Welcome${NAME:+ to $NAME}!"
 
 # Start core services: one-time system tasks.
 for f in /etc/runit/sysinit.d/*.sh; do
