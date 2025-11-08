@@ -3,19 +3,14 @@ msg() {
     printf '\033[1m=> %s\033[m\n' "$@"
 }
 
-msg_ok() {
-    # bold/green
-    printf '\033[1m\033[32m OK\033[m\n'
-}
-
 msg_error() {
     # bold/red
-    printf '\033[1m\033[31mERROR: %s\033[m\n' "$@"
+    printf '\033[1;31mERROR: %s\033[m\n' "$@"
 }
 
 msg_warn() {
     # bold/yellow
-    printf '\033[1m\033[33mWARNING: %s\033[m\n' "$@"
+    printf '\033[1;33mWARNING: %s\033[m\n' "$@"
 }
 
 emergency_shell() {
